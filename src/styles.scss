@@ -1,0 +1,305 @@
+@import "resets/normalize.scss";
+@import "resets/reset.scss";
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500&display=swap");
+
+$slate-050: #f8fafc;
+$slate-100: #f1f5f9;
+$slate-200: #e2e8f0;
+$slate-300: #cbd5e1;
+$slate-400: #94a3b8;
+$slate-800: #1e293b;
+
+$violet-050: #f5f3ff;
+
+$green-200: #bbf7d0;
+$green-800: #166534;
+$red-200: #fecaca;
+$red-800: #991b1b;
+
+body {
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.navbar {
+  padding-top: 1.2rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.transactions-container {
+  background: radial-gradient(
+    at right top,
+    rgb(55, 65, 81),
+    rgb(17, 24, 39),
+    rgb(0, 0, 0)
+  );
+  color: $slate-200;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+
+  #title {
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .transaction-card {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+
+    #type {
+      margin-right: 0.8rem;
+    }
+
+    #name {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    #date {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: $slate-400;
+    }
+
+    #money {
+      font-weight: 500;
+      font-size: 1.25rem;
+    }
+
+    svg {
+      border-radius: 0.85rem;
+      padding: 0.65rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      margin-right: 0.4rem;
+
+      &.red {
+        background-color: $red-200;
+        stroke: $red-800;
+      }
+
+      &.green {
+        background-color: $green-200;
+        stroke: $green-800;
+      }
+
+      &.neutral {
+        background-color: $slate-200;
+        stroke: $slate-800;
+      }
+    }
+  }
+
+  .transaction-card-loading {
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+
+    svg {
+      border-radius: 0.85rem;
+      padding: 0.65rem;
+      width: 2.8rem;
+      height: 2.8rem;
+      margin-right: 0.4rem;
+      animation: spin 1s linear infinite;
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+}
+
+.people-container {
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+
+  .send-icon {
+    border-radius: 0.85rem;
+    padding: 0.65rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    margin-bottom: 0.6rem;
+    background: linear-gradient(
+      to right,
+      rgb(251, 113, 133),
+      rgb(217, 70, 239),
+      rgb(99, 102, 241)
+    );
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    svg {
+      stroke: $violet-050;
+    }
+  }
+  .person-icon {
+    border-radius: 0.85rem;
+    padding: 0.65rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    margin-bottom: 0.6rem;
+    background: linear-gradient(rgb(17, 24, 39), rgb(75, 85, 99));
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    svg {
+      stroke: $violet-050;
+    }
+  }
+
+  .person-card {
+    text-align: center;
+
+    p {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+  }
+}
+
+.cards-container {
+  .cards-header {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    margin-bottom: 1rem;
+
+    svg {
+      border-radius: 0.85rem;
+      padding: 0.45rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+      &.plus {
+        background-color: $slate-800;
+        stroke: $slate-100;
+      }
+    }
+
+    #title {
+      font-weight: 800;
+      font-size: 1.45rem;
+      color: $slate-800;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .cards-scrollable {
+    display: flex;
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+
+  .cards-scrollable::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card {
+    flex-shrink: 0;
+    padding: 1.2rem;
+    margin-right: 1.5rem;
+    width: 250px;
+    height: 150px;
+    border-radius: 1rem;
+    background: linear-gradient(
+      to right top,
+      rgb(139, 92, 246),
+      rgb(253, 186, 116)
+    );
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+    p {
+      color: white;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-description {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    #balance {
+      font-weight: 500;
+      font-size: 1.9rem;
+    }
+
+    #number {
+      font-weight: 200;
+      font-size: 1rem;
+    }
+  }
+
+  .card-loading {
+    flex-shrink: 0;
+    padding: 1.2rem;
+    margin-right: 1.5rem;
+    width: 250px;
+    height: 150px;
+    border-radius: 1rem;
+    background-color: $slate-100;
+    animation: loading-skeleton 1.5s ease-in-out infinite;
+  }
+
+  @keyframes loading-skeleton {
+    0% {
+      background-color: $slate-100;
+    }
+    50% {
+      background-color: $slate-200;
+    }
+    100% {
+      background-color: $slate-100;
+    }
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.gap {
+  gap: 0.3rem;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+}

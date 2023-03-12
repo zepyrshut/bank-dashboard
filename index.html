@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=100%, initial-scale=1.0" />
+    <title>Banco Laberinto</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="navbar flex justify-between">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </div>
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <div x-data="cards">
+        <div class="cards-container">
+          <div class="cards-header flex items-center justify-between">
+            <p id="title">Mis tarjetas</p>
+
+            <div>
+              <svg
+                class="plus"
+                xmlns="http:/
+                /www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <div class="cards-scrollable">
+            <template x-if="isLoading">
+              <div class="flex">
+                <div class="card-loading"></div>
+                <div class="card-loading"></div>
+              </div>
+            </template>
+
+            <template x-for="data in cards" :key="data.id">
+              <div class="card">
+                <div class="card-description">
+                  <div x-show="data.typeId === 1">
+                    <p>Tarjeta débito</p>
+                  </div>
+
+                  <div x-show="data.typeId === 2">
+                    <p>Tarjeta crédito</p>
+                  </div>
+
+                  <div>
+                    <p>Saldo:</p>
+                    <p id="balance" x-money.es-ES.EUR="data.balance"></p>
+                  </div>
+
+                  <p id="number" x-text="data.number"></p>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <div x-data="people">
+        <div class="people-container flex justify-around">
+          <div class="person-card">
+            <div>
+              <div class="send-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5"
+                  />
+                </svg>
+              </div>
+
+              <div>
+                <p>Enviar</p>
+              </div>
+            </div>
+          </div>
+          <template x-for="data in people" :key="data.id">
+            <div class="person-card">
+              <div>
+                <div class="person-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                    />
+                  </svg>
+                </div>
+
+                <div>
+                  <p x-text="data.name"></p>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <div x-data="transactions">
+        <div class="transactions-container">
+          <h2 id="title">Transacciones</h2>
+          <template x-if="isLoading">
+            <div class="flex">
+              <div class="transaction-card-loading">
+                <div class="flex">
+                  <div id="type">
+                    <svg
+                      class="neutral"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                    >
+                      <path
+                        class="spinner"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+          <template x-for="data in transactions" :key="data.id">
+            <div class="transaction-card">
+              <div class="flex">
+                <div
+                  class="flex justify-center"
+                  id="type"
+                  x-show="data.movementTypeId === 0"
+                >
+                  <svg
+                    class="red"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.5 12h-15"
+                    />
+                  </svg>
+                </div>
+                <div id="type" x-show="data.movementTypeId === 1">
+                  <svg
+                    class="green"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 4.5v15m7.5-7.5h-15"
+                    />
+                  </svg>
+                </div>
+                <div id="type" x-show="data.movementTypeId === 2">
+                  <svg
+                    class="neutral"
+                    class="w-6 h-6"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                    />
+                  </svg>
+                </div>
+
+                <div class="flex column justify-center gap">
+                  <p id="name" x-text="data.name"></p>
+                  <p id="date" x-text="data.date"></p>
+                </div>
+              </div>
+              <div>
+                <p id="money" x-money.es-ES.EUR="data.amount"></p>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
