@@ -31,6 +31,43 @@ body {
   }
 }
 
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -300px;
+  width: 300px;
+  height: 100%;
+  background: linear-gradient(rgb(17, 24, 39), rgb(75, 85, 99));
+  transition: all 0.3s ease-in-out;
+  padding-top: 30px;
+
+  svg {
+    stroke: $slate-200;
+    width: 1.8rem;
+  }
+
+  li div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    margin-left: 0.8rem;
+  }
+}
+
+.side-menu a {
+  text-decoration: none;
+  font-size: 18px;
+  color: $slate-200;
+  display: block;
+  transition: 0.3s;
+  margin-left: 0.8rem;
+}
+
+.show-side-menu {
+  left: 0;
+  box-shadow: 15px 0px 29px -12px rgba(0, 0, 0, 0.43);
+}
+
 .transactions-container {
   background: radial-gradient(
     at right top,
@@ -200,6 +237,51 @@ body {
     }
   }
 
+  .popover {
+    position: absolute;
+    left: 240px;
+    padding: 1.2rem;
+    border-radius: 1rem;
+    background-color: $slate-800;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    color: $slate-100;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+
+    cursor: pointer;
+
+    svg {
+      stroke: $slate-100;
+    }
+  }
+
+  // .show-popover {
+  //   display: none;
+  // }
+
+  .fade-in {
+    opacity: 0;
+    animation: fade-in 0.2s forwards;
+  }
+
+  .fade-out {
+    opacity: 1;
+    animation: fade-out 0.2s forwards;
+  }
+
+  @keyframes fade-in {
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    100% {
+      opacity: 0;
+    }
+  }
+
   .cards-scrollable {
     display: flex;
     overflow-x: scroll;
@@ -302,4 +384,12 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2.25rem;
+}
+
+.w-6 {
+  width: 1.5rem;
+}
+
+.h-6 {
+  height: 1.5rem;
 }
